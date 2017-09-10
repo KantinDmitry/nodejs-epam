@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-epam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KantinDmitry/nodejs-epam.git"
+  },
+  "author": "Dmitry Kantin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KantinDmitry/nodejs-epam/issues"
+  },
+  "homepage": "https://github.com/KantinDmitry/nodejs-epam#readme"
+}
