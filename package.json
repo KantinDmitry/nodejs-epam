@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/KantinDmitry/nodejs-epam/issues"
   },
-  "homepage": "https://github.com/KantinDmitry/nodejs-epam#readme"
+  "homepage": "https://github.com/KantinDmitry/nodejs-epam#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0"
+  }
 }
