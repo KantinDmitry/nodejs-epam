@@ -1,1 +1,2 @@
-console.log('App executed');
+require('babel-core/register');
+require('./app');
