@@ -24,8 +24,11 @@ export default class Importer {
             parser.on('error', reject);
             parser.on('finish', () => resolve(importedData));
             parser.on('readable', () => {
-                while (record = parser.read()) {
+                record = parser.read();
+
+                while (record) {
                     importedData.push(record);
+                    record = parser.read();
                 }
             });
 

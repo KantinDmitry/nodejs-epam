@@ -1,7 +1,7 @@
 import Config from 'config';
 import { User, Product } from 'models';
 import dirWatcherEventEmitter from 'modules/dirwatcher/eventEmitter';
-import { DirwatcherEvents } from 'modules/dirwatcher/constants';
+import DirwatcherEvents from 'modules/dirwatcher/constants';
 import DirWatcher from 'modules/dirwatcher';
 import Importer from 'modules/importer';
 

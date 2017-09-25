@@ -1,0 +1,22 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "padded-blocks": "off",
+        "indent": ["error", 4],
+        "no-use-before-define": "off",
+        "padded-blocks": "off",
+        "no-plusplus": "off",
+        "comma-dangle": ["error", "always-multiline"],
+        "class-methods-use-this": "off",
+        "import/extensions": "off",
+        "no-console": "off",
+        "no-unused-vars": "warn"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": ["./", "node_modules"]
+            }
+        }
+    }
+}

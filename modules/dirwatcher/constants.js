@@ -2,6 +2,4 @@ const DirwatcherEvents = {
     CHANGE: 'dirwatcher:changed',
 };
 
-export {
-    DirwatcherEvents,
-};
+export { DirwatcherEvents as default };
