@@ -1,14 +1,12 @@
 import fs from 'fs';
 import dirEventEmitter from './eventEmitter';
-import { DirwatcherEvents } from './constants';
+import DirwatcherEvents from './constants';
 
 function fsChangeListener(eventType, filename) {
     console.log('DirWatcher -> fsChangeListener', 'event', eventType, filename);
 
-    switch (eventType) {
-        case 'change':
-            dirEventEmitter.emit(DirwatcherEvents.CHANGE, filename);
-            break;
+    if (eventType === 'change') {
+        dirEventEmitter.emit(DirwatcherEvents.CHANGE, filename);
     }
 }
 
@@ -22,7 +20,7 @@ export default class DirWatcher {
         const watchConfig = {
             persistent: true,
             recursive: true,
-        }
+        };
 
         setTimeout(() => fs.watch(path, watchConfig, fsChangeListener), delay);
     }
