@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint-staged": "sh lint-staged.sh",
-    "start": "NODE_PATH=./ node_modules/nodemon/bin/nodemon.js index.js"
+    "start": "NODE_PATH=./ node_modules/nodemon/bin/nodemon.js index.js",
+    "debug": "NODE_PATH=./ node_modules/nodemon/bin/nodemon.js --inspect index.js"
   },
   "pre-commit": [
     "lint-staged"

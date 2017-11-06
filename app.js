@@ -1,15 +1,10 @@
-import Config from 'config';
-import { User, Product } from 'models';
-import dirWatcherEventEmitter from 'modules/dirwatcher/eventEmitter';
-import DirwatcherEvents from 'modules/dirwatcher/constants';
-import DirWatcher from 'modules/dirwatcher';
-import Importer from 'modules/importer';
+import express from 'express';
+import cookieParser from 'middlewares/cookie-parser';
+import queryParser from 'middlewares/query-parser';
 
-const user = new User();
-const product = new Product();
-const dirWatcher = new DirWatcher();
-const importer = new Importer();
+const app = express();
 
-console.log(Config.name);
-dirWatcher.watch(Config.dataPath, 2000);
-importer.subscribeToEvent(dirWatcherEventEmitter, DirwatcherEvents.CHANGE, { isSync: false });
+app.use(cookieParser);
+app.use(queryParser);
+
+export default app;
