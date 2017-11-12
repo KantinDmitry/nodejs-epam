@@ -3,6 +3,7 @@ import find from 'lodash.find';
 import pick from 'lodash.pick';
 import jwt from 'jsonwebtoken';
 import { generateAuthResponse } from 'helpers/auth-helpers';
+import { SECRET } from 'config/configuration';
 
 const authRouter = Router();
 const fakeData = {
@@ -29,7 +30,7 @@ authRouter.post('/', (req, res) => {
     }
 
     const payload = pick(user, ['name', 'id']);
-    const token = jwt.sign(payload, 'secret', { expiresIn: TOKEN_EXPIRATION_TIME });
+    const token = jwt.sign(payload, SECRET, { expiresIn: TOKEN_EXPIRATION_TIME });
 
     res.status(200).json(generateAuthResponse(user, token));
 });

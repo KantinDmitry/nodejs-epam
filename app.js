@@ -11,5 +11,4 @@ app.use(queryParser);
 app.use(bodyParser.json());
 app.use('/api', apiRouter);
 
-
 export default app;
