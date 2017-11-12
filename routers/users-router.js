@@ -1,6 +1,6 @@
-import express from 'express';
+import { Router } from 'express';
 
-const usersRouter = express.Router();
+const usersRouter = Router();
 const fakeData = {
     users: [
         { id: 1, name: 'user1' },

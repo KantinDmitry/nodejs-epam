@@ -1,7 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import get from 'lodash.get';
 
-const productsRouter = express.Router();
+const productsRouter = Router();
 const fakeData = {
     products: [{
         id: 1,
