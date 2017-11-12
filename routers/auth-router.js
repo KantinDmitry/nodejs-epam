@@ -4,22 +4,17 @@ import pick from 'lodash.pick';
 import jwt from 'jsonwebtoken';
 import { generateAuthResponse } from 'helpers/auth-helpers';
 import { SECRET } from 'config/configuration';
+import { users } from 'data';
+import passwordHash from 'password-hash';
 
 const authRouter = Router();
-const fakeData = {
-    users: [
-        { id: 1, name: 'user1', password: 'password1' },
-        { id: 2, name: 'user2', password: 'password2' },
-        { id: 3, name: 'user3', password: 'password3' },
-    ],
-};
 const TOKEN_EXPIRATION_TIME = 120;
 
 authRouter.post('/', (req, res) => {
     const { name, password } = req.body;
-    const user = find(fakeData.users, { name });
+    const user = find(users, { name });
 
-    if (!user || user.password !== password) {
+    if (!user || !passwordHash.verify(password, user.passwordHash)) {
         res.status(400).json({
             code: 400,
             message: 'wrong combination of name and password',

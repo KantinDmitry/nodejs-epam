@@ -1,18 +1,8 @@
 import { Router } from 'express';
 import get from 'lodash.get';
+import { products } from 'data';
 
 const productsRouter = Router();
-const fakeData = {
-    products: [{
-        id: 1,
-        name: 'product #1',
-        reviews: ['very dank product', 'value for money!'],
-    }, {
-        id: 2,
-        name: 'product #2',
-        reviews: ['poor quallity'],
-    }],
-};
 
 const NOT_FOUND_JSON = JSON.stringify({ message: 'Not found' });
 const WRONG_FORMAT_JSON = JSON.stringify({ message: 'Wrong format' });
@@ -27,19 +17,19 @@ productsRouter.post('/', (req, res) => {
         return res.status(400).json(WRONG_FORMAT_JSON);
     }
 
-    const product = Object.assign({}, body, { id: fakeData.products.length + 1 });
-    fakeData.products.push(product);
+    const product = Object.assign({}, body, { id: products.length + 1 });
+    products.push(product);
 
     return res.status(200).json(DONE_JSON);
 });
 
 productsRouter.get('/', (req, res) => {
-    res.status(200).json(fakeData.products);
+    res.status(200).json(products);
 });
 
 productsRouter.get('/:id', (req, res) => {
     const { id } = req.params;
-    const product = fakeData.products[id];
+    const product = products[id];
 
     if (product) {
         res.status(200).json(product);
@@ -50,7 +40,7 @@ productsRouter.get('/:id', (req, res) => {
 
 productsRouter.get('/:id/reviews', (req, res) => {
     const { id } = req.params;
-    const productReviews = get(fakeData, `products[${id}].reviews`);
+    const productReviews = get(products, `[${id}].reviews`);
 
     if (productReviews) {
         res.status(200).json(productReviews);

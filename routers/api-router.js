@@ -5,7 +5,6 @@ import authRouter from 'routers/auth-router';
 import tokenVerificationFactory from 'middlewares/token-verificator';
 import { SECRET } from 'config/configuration';
 
-console.log('SECRET', SECRET);
 const apiRouter = Router();
 const tokenVerificationMiddleware = tokenVerificationFactory(SECRET);
 
