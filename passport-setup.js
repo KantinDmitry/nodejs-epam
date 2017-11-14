@@ -2,6 +2,7 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import FacebookStrategy from 'passport-facebook';
 import TwitterStrategy from 'passport-twitter';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 import { users } from 'data';
 import passwordHash from 'password-hash';
 import find from 'lodash.find';
@@ -10,6 +11,8 @@ import {
     FACEBOOK_APP_SECRET,
     TWITTER_CONSUMER_KEY,
     TWITTER_CONSUMER_SECRET,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
 } from 'config/configuration';
 
 const LocalStrategyConfig = {
@@ -42,7 +45,6 @@ const facebookStrategy = new FacebookStrategy(
             accessToken,
             refreshToken,
             profile,
-            done,
         });
 
         return done(null, profile);
@@ -62,13 +64,33 @@ const twitterStrategy = new TwitterStrategy(
             accessToken,
             tokenSecret,
             profile,
-            done,
         });
 
         return done(null, profile);
     }
 );
 
+const GoogleStrategyConfig = {
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: 'http://localhost:8080/api/auth/google/callback',
+    session: false,
+};
+
+const googleStrategy = new GoogleStrategy(
+    GoogleStrategyConfig,
+    (accessToken, refreshToken, profile, cb) => {
+        console.log({
+            accessToken,
+            refreshToken,
+            profile,
+        });
+
+        return cb(null, profile);
+    }
+);
+
+passport.use(googleStrategy);
 passport.use(twitterStrategy);
 passport.use(facebookStrategy);
 passport.use(localStrategy);

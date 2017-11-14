@@ -63,4 +63,15 @@ authRouter.get('/twitter/callback', twitterAuthCheck, (req, res) => {
     res.status(200).json(req.user);
 });
 
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
+const googoleAuthCheck = passport.authenticate('google', {
+    failureRedirect: '/login',
+    session: false,
+});
+
+authRouter.get('/google/callback', googoleAuthCheck, (req, res) => {
+    res.status(200).json(req.user);
+});
+
 export default authRouter;
