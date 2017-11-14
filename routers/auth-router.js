@@ -41,4 +41,15 @@ authRouter.post('/local', passport.authenticate('local', { session: false }), (r
     }
 });
 
+authRouter.get('/facebook', passport.authenticate('facebook'));
+
+const facebookAuthCheck = passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    session: false,
+});
+
+authRouter.get('/facebook/callback', facebookAuthCheck, (req, res) => {
+    res.status(200).json(req.user);
+});
+
 export default authRouter;

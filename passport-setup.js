@@ -1,8 +1,10 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import FacebookStrategy from 'passport-facebook';
 import { users } from 'data';
 import passwordHash from 'password-hash';
 import find from 'lodash.find';
+import { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } from 'config/configuration';
 
 const LocalStrategyConfig = {
     usernameField: 'name',
@@ -20,6 +22,27 @@ const localStrategy = new LocalStrategy(LocalStrategyConfig, (username, password
     }
 });
 
+const FacebookStrategyConfig = {
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: 'http://localhost:8080/api/auth/facebook/callback',
+};
+
+const facebookStrategy = new FacebookStrategy(
+    FacebookStrategyConfig,
+    (accessToken, refreshToken, profile, done) => {
+        console.log({
+            accessToken,
+            refreshToken,
+            profile,
+            done,
+        });
+
+        return done(null, profile);
+    }
+);
+
+passport.use(facebookStrategy);
 passport.use(localStrategy);
 
 export default passport;
