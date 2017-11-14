@@ -52,4 +52,15 @@ authRouter.get('/facebook/callback', facebookAuthCheck, (req, res) => {
     res.status(200).json(req.user);
 });
 
+authRouter.get('/twitter', passport.authenticate('twitter'));
+
+const twitterAuthCheck = passport.authenticate('twitter', {
+    failureRedirect: '/login',
+    session: false,
+});
+
+authRouter.get('/twitter/callback', twitterAuthCheck, (req, res) => {
+    res.status(200).json(req.user);
+});
+
 export default authRouter;

@@ -1,10 +1,16 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import FacebookStrategy from 'passport-facebook';
+import TwitterStrategy from 'passport-twitter';
 import { users } from 'data';
 import passwordHash from 'password-hash';
 import find from 'lodash.find';
-import { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } from 'config/configuration';
+import {
+    FACEBOOK_APP_ID,
+    FACEBOOK_APP_SECRET,
+    TWITTER_CONSUMER_KEY,
+    TWITTER_CONSUMER_SECRET,
+} from 'config/configuration';
 
 const LocalStrategyConfig = {
     usernameField: 'name',
@@ -26,6 +32,7 @@ const FacebookStrategyConfig = {
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
     callbackURL: 'http://localhost:8080/api/auth/facebook/callback',
+    session: false,
 };
 
 const facebookStrategy = new FacebookStrategy(
@@ -42,6 +49,27 @@ const facebookStrategy = new FacebookStrategy(
     }
 );
 
+const TwitterStrategyConfig = {
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
+    callbackURL: 'http://localhost:8080/api/auth/twitter/callback',
+};
+
+const twitterStrategy = new TwitterStrategy(
+    TwitterStrategyConfig,
+    (accessToken, tokenSecret, profile, done) => {
+        console.log({
+            accessToken,
+            tokenSecret,
+            profile,
+            done,
+        });
+
+        return done(null, profile);
+    }
+);
+
+passport.use(twitterStrategy);
 passport.use(facebookStrategy);
 passport.use(localStrategy);
 
