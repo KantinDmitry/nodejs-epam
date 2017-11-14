@@ -6,6 +6,7 @@ import { generateAuthResponse } from 'helpers/auth-helpers';
 import { SECRET } from 'config/configuration';
 import { users } from 'data';
 import passwordHash from 'password-hash';
+import passport from 'passport';
 
 const authRouter = Router();
 const TOKEN_EXPIRATION_TIME = 120;
@@ -28,6 +29,16 @@ authRouter.post('/', (req, res) => {
     const token = jwt.sign(payload, SECRET, { expiresIn: TOKEN_EXPIRATION_TIME });
 
     res.status(200).json(generateAuthResponse(user, token));
+});
+
+authRouter.post('/local', passport.authenticate('local', { session: false }), (req, res) => {
+    if (req.isAuthenticated()) {
+        const { user } = req;
+        const payload = pick(user, ['name', 'id']);
+        const token = jwt.sign(payload, SECRET, { expiresIn: TOKEN_EXPIRATION_TIME });
+
+        res.status(200).json(generateAuthResponse(user, token));
+    }
 });
 
 export default authRouter;
