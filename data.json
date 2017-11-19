@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "user1",
+            "passwordHash": "sha1$921afbf1$1$d71f09899ae763f65b87d5f2c766ceade321f294"
+        },
+        {
+            "id": 2,
+            "name": "user2",
+            "passwordHash": "sha1$2c9f81a5$1$21148f64cba0fae12933287a0d96fbb5c5a3c870"
+        },
+        {
+            "id": 3,
+            "name": "user3",
+            "passwordHash": "sha1$4fad4a6c$1$366d5d8ea209f4d78478da45a161455404b294fb"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "product #1",
+            "reviews": [
+                "very dank product",
+                "value for money!"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "product #2",
+            "reviews": [
+                "poor quallity"
+            ]
+        }
+    ]
+}
